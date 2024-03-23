@@ -6,5 +6,6 @@ Got further research done, started super simple shell (see testing), created rep
 Talked about expectations, parsed up workload got the flow of the shell laid out.
 
 Chase 3/23:
-working in repo intermittently on getting a flow chart set up and uploaded
+working in repo intermittently on getting a flow chart set up and uploaded.
+Flow Chart will require more research than expected but I believe a solid, not finished, README has been accomplished.
 
