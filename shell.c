@@ -28,6 +28,7 @@ int main(int ac, char **av, char **env)
 				/*Parent Process Handling*/
 			}
 		}
+		free_all();
 	}
 	return (0);
 }
