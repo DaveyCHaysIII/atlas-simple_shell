@@ -8,18 +8,19 @@
  * Return: no return
  */
 
-void input_parcer(char *buffer, char **argVec)
+void input_parser(char *buffer, char **argVec)
 {
 	int i;
 	char *token;
-	const char *delim = " ";
+	char *delim = ":";
 
 	i = 0;
-	token = strtok(buff, delim);
+	token = strtok(buffer, delim);
 	while (token != NULL)
 	{
 		argVec[i] = strdup(token);
 		token = strtok(NULL, delim);
 		i++;
 	}
+	argVec[i] = NULL;
 }
