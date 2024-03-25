@@ -19,4 +19,10 @@ char *findpath( char *command)
 return ("/usr/bin/command");
 }
 
-and handle the errors if execve fails. I'm going to do some more research and then try to do this tonight. I'm not sure at this moment what "interactive" mode even really means or how we'll have to shape our code to accomodate it but I'll try and get that figured out asap. 
+and handle the errors if execve fails. I'm going to do some more research and then try to do this tonight. I'm not sure at this moment what "interactive" mode even really means or how we'll have to shape our code to accomodate it but I'll try and get that figured out asap.
+
+Davey 3/25
+
+ignore previous entry, it makes much more sense to check if the command exists prior to forking in the first place, plus the 30pt question requires it. Added an implementation of getenv() since it wasn't on the list of approved functions. This'll give us quick and dirty access to PWD, HOME, PATH and many other environment variables we may need along the way. 
+
+The entire testing folder is meant to be a messy leaky random assembly of code we can pick through, I'm gonna be populating it a lot more going foreward so we have little working code snippets and main files we can use to test on  
