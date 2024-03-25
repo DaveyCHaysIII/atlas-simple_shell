@@ -56,10 +56,9 @@ int main(int ac, char **av)
                         else
                         {
                                 printf("%s", argVec[0]);
-                                //while (i >= 0)
-                                //{
-                                //      free(argVec[i]);
-                                //}
+                                free(argVec[0]);
+				free(token);
+				free(buff);
                         }
 			/* this kills the child */
 			j++;
