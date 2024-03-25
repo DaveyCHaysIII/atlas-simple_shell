@@ -14,14 +14,19 @@ int main(int ac, char **av, char **env)
 		command = getline(&buffer, &n, stdin);
 		input_parse(buffer, argVec);
 		path = command_path(argVec[0]);
-		id = fork();
-		if (id == 0)
+		if (path != NULL)
 		{
-			/*Child Process Handling*/
-		}
-		else
-		{
-			/*Parent Process Handling*/
+			id = fork();
+			if (id == 0)
+			{
+				/*Child Process Handling*/
+				exec_handler(path, argVec, environ);
+				//calls execve, handles all errors
+			}
+			else
+			{
+				/*Parent Process Handling*/
+			}
 		}
 	}
 	return (0);
