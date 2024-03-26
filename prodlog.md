@@ -30,3 +30,5 @@ The entire testing folder is meant to be a messy leaky random assembly of code w
 edit: input_parser needs both a rename and I need to stop it from segfaulting- it's going to be used in at least 2 places (both tokenizing the input from getline and parsing the path) so it needs to work (and it needs to work now)  
 
 Chase 3/25 added two flow chart files. Shell flow chart seems, sparse, inadequate. Needs modification. Author page added, fairly simple surprisingly. I think. Did some finishing touches to the README, just needs final approval.
+
+Chase 3/26 met for PLD played around with flow chart, edited one word in README, filled out Sprint review

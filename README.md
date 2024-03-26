@@ -12,7 +12,7 @@ As of this writing those are still in flux and subject to change. So far they ar
 ## Installation
 Fairly straightforward, download the requisite files from Github, compile and run.
 
-## Usuage
+## Usage
 The shell is simplistic, with expected functionalites such as:
 - Executing programs 
 - System calls: getpid, pwd, open, opendir, kill, close, closedir, chdir, exit.
