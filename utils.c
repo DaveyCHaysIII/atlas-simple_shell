@@ -1,6 +1,7 @@
 #include "shell.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /*
  * _getenv()- gets a specific environment variable
@@ -49,8 +50,10 @@ void free_vector(char **vector)
 	while (vector[i] != NULL)
 	{
 		free(vector[i]);
+		printf("freed vector[%d]\n", i);
 		i++;
 	}
+	free(vector);
 }
 
 
