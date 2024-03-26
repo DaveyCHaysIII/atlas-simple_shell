@@ -4,7 +4,7 @@
 void prompt();
 void input_parser(char *buffer, char **argVec);
 void free_vector(char **vector);
-char *_getenv(const char *name, char **env);
+char *_getenv(const char *name);
 char *command_path(char *command);
 
 #endif
