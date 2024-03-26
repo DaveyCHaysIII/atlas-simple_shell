@@ -6,7 +6,7 @@
 int main()
 {
 	int i;
-	char string[] = "/home/davey/whatever:/hello/i/cant/see:/testing/testing/testing";
+	char *string = getenv("PATH");
 	char **argVec;
 
 	argVec = malloc(sizeof(char) * 100);
