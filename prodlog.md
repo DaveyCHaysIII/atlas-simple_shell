@@ -28,3 +28,5 @@ ignore previous entry, it makes much more sense to check if the command exists p
 The entire testing folder is meant to be a messy leaky random assembly of code we can pick through, I'm gonna be populating it a lot more going foreward so we have little working code snippets and main files we can use to test on
 
 edit: input_parser needs both a rename and I need to stop it from segfaulting- it's going to be used in at least 2 places (both tokenizing the input from getline and parsing the path) so it needs to work (and it needs to work now)  
+
+Chase 3/25 added two flow chart files. Shell flow chart seems, sparse, inadequate. Needs modification. Author page added, fairly simple surprisingly. I think.
