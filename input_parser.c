@@ -1,5 +1,6 @@
 #include "shell.h"
 #include <string.h>
+#include <stdio.h>
 
 /*
  * input_parcer()- parses the input
@@ -13,12 +14,14 @@ void input_parser(char *buffer, char **argVec)
 	int i;
 	char *token;
 	char *delim = ":";
+	printf("we made it! Yay!");
 
 	i = 0;
 	token = strtok(buffer, delim);
 	while (token != NULL)
 	{
-		argVec[i] = strdup(token);
+		printf("%s\n", token);
+		/*argVec[i] = strdup(token);*/
 		token = strtok(NULL, delim);
 		i++;
 	}
