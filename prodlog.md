@@ -32,3 +32,5 @@ edit: input_parser needs both a rename and I need to stop it from segfaulting- i
 Chase 3/25 added two flow chart files. Shell flow chart seems, sparse, inadequate. Needs modification. Author page added, fairly simple surprisingly. I think. Did some finishing touches to the README, just needs final approval.
 
 Chase 3/26 met for PLD played around with flow chart, edited one word in README, filled out Sprint review
+
+Davey 3/27 doing some quick work tonight, specifically around string manipulation with PATH, command_path function seg faulting but we've made good progress tonight (would like this function working as intended before friday)

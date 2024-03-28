@@ -3,10 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/*
+/**
  * _getenv()- gets a specific environment variable
  * @name: name of variable desired
- * @env: the environ array
  *
  * Return: the value on success, NULL on fail
  */
@@ -19,7 +18,7 @@ char *_getenv(const char *name)
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-    		status = 1;
+		status = 1;
 		for (j = 0; environ[i][j] != '='; j++)
 		{
 			if (name[j] != environ[i][j])
@@ -36,7 +35,7 @@ char *_getenv(const char *name)
 	return (NULL);
 }
 
-/*
+/**
  * free_vector()- frees an array of characters
  * @vector: the array in question
  *
