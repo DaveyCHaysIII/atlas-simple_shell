@@ -11,7 +11,7 @@ int main()
 
 	argVec = malloc(sizeof(char) * 100);
 
-	input_parser(string, argVec);
+	input_parser(string, ":",  argVec);
 	
 	i = 0;
 	while (argVec[i] != NULL)

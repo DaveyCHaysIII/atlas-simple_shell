@@ -1,5 +1,6 @@
 #include "shell.h"
 #include <string.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
 
@@ -18,15 +19,15 @@ char *command_path(char *command)
 	int i;
 
 	char *path = _getenv("PATH");
-	printf("got path!");
 
-	tokens = NULL;
+
+	tokens = malloc(sizeof(char) * 100);
 	input_parser(path, ":", tokens);
-	printf("parsed tokens!");
 	i = 0;
 	while (tokens[i] != NULL)
 	{
 		strcpy(path_buffer, tokens[i]);
+		strcat(path_buffer, "/");
 		strcat(path_buffer, command);
 		printf("Buffer: %s\n", path_buffer);
 		if (access(path_buffer, F_OK) == 0 && access(path_buffer, X_OK) == 0)
