@@ -6,7 +6,7 @@ void input_parser(char *buffer, char *delim, char **argVec);
 void free_vector(char **vector);
 void exec_handler(char *path, char **argVec);
 void free_all(char *buffer, char **argVec, char *path);
-void print_env();
+void print_env(void);
 int builtin_handler(char **argVec, char *buffer, char *path);
 char *_getenv(const char *name);
 char *command_path(char *command);

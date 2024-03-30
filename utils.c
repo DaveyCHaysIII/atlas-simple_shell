@@ -49,7 +49,6 @@ void free_vector(char **vector)
 	while (vector[i] != NULL)
 	{
 		free(vector[i]);
-		printf("freed vector[%d]\n", i);
 		i++;
 	}
 	free(vector);
@@ -61,7 +60,7 @@ void free_vector(char **vector)
  * Return: no return
  */
 
-void print_env()
+void print_env(void)
 {
 	int i;
 
@@ -73,5 +72,3 @@ void print_env()
 	}
 
 }
-
-

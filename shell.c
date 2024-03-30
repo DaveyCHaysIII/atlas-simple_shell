@@ -5,6 +5,12 @@
 #include <sys/wait.h>
 #include <string.h>
 
+/**
+ * main()- Simple Shell
+ *
+ * Return: 0
+ */
+
 int main(void)
 {
 	char *buffer;
@@ -12,41 +18,42 @@ int main(void)
 	size_t n;
 	char **argVec;
 	char *path;
-	int id;
+	int id, i;
 	int builtin;
-	
-	argVec = malloc(sizeof(char) * 100);
+
+	n = 0;
+	argVec = malloc(sizeof(char) * 10);
 	while (1)
 	{
 		prompt();
 		command = getline(&buffer, &n, stdin);
 		if (command < 0)
 		{
-			perror("");
+			perror("ss: commanderr ");
 		}
 		input_parser(buffer, " ", argVec);
 		path = command_path(argVec[0]);
-		if (path == NULL)
-		{
-			perror("");
-		}	
 		builtin = builtin_handler(argVec, buffer, path);
 		if (path != NULL && builtin != 0)
 		{
 			id = fork();
 			if (id == 0)
 			{
-				/*Child Process Handling*/
 				exec_handler(path, argVec);
 				continue;
 			}
 			else
 			{
 				wait(NULL);
-				/*Parent Process Handling*/
+				buffer = NULL;
+				i = 0;
+				while (argVec[i] != NULL)
+				{
+					argVec[i] = NULL;
+					i++;
+				}
 			}
 		}
-		free_all(buffer, argVec, path);
 	}
 	return (0);
 }
@@ -57,7 +64,7 @@ int main(void)
  * Return: no return
  */
 
-void prompt()
+void prompt(void)
 {
 	printf("$ :");
 }
@@ -77,7 +84,7 @@ void exec_handler(char *path, char **argVec)
 	exec = execve(path, argVec, environ);
 	if (exec < 0)
 	{
-		perror("");
+		perror("ss: execerr ");
 	}
 }
 
@@ -92,15 +99,18 @@ void exec_handler(char *path, char **argVec)
 
 void free_all(char *buffer, char **argVec, char *path)
 {
-	free (buffer);
-	free (path);
+	free(buffer);
+	free(path);
 	free_vector(argVec);
 }
 
 /**
  * builtin_handler()- handles builtins exit() and env()!
- * 
- * Return 0 if neither, 1 if either! (though exit will never make it through to completion)
+ * @argVec: the argument vector
+ * @buffer: the buffer
+ * @path: the path
+ *
+ * Return: 0 if neither, 1 if either!
  */
 
 int builtin_handler(char **argVec, char *buffer, char *path)

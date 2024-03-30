@@ -5,7 +5,7 @@
 /**
  * input_parser()- parses the input
  * @buffer: the buffer
- * @delim = the delimiter
+ * @delim : the delimiter
  * @argVec: the tokenized arg vector
  * Return: no return
  */
