@@ -55,4 +55,23 @@ void free_vector(char **vector)
 	free(vector);
 }
 
+/**
+ * print_env()- prints out the environment
+ *
+ * Return: no return
+ */
+
+void print_env()
+{
+	int i;
+
+	i = 0;
+	while (environ[i] != NULL)
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
+
+}
+
 

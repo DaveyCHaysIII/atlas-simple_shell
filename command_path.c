@@ -22,6 +22,11 @@ char *command_path(char *command)
 
 
 	tokens = malloc(sizeof(char) * 100);
+	if (tokens == NULL)
+	{
+		perror("");
+		return(NULL);
+	}
 	input_parser(path, ":", tokens);
 	i = 0;
 	while (tokens[i] != NULL)
@@ -39,5 +44,6 @@ char *command_path(char *command)
 		i++;
 	}
 	free_vector(tokens);
+	perror("");
 	return (NULL);
 }

@@ -3,27 +3,34 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <string.h>
 
-int main(int ac, char **av, char **env)
+int main(void)
 {
 	char *buffer;
-	ssize_t n;
-	char *argVec[10];
+	int command;
+	size_t n;
+	char **argVec;
 	char *path;
 	int id;
 	int builtin;
-
+	
+	argVec = malloc(sizeof(char) * 100);
 	while (1)
 	{
 		prompt();
 		command = getline(&buffer, &n, stdin);
-		input_parse(buffer, argVec);
+		if (command < 0)
+		{
+			perror("");
+		}
+		input_parser(buffer, " ", argVec);
 		path = command_path(argVec[0]);
 		if (path == NULL)
 		{
-			perror(""); //command not found or something
+			perror("");
 		}	
-		builtin = builtin_handler(argVec[0]);
+		builtin = builtin_handler(argVec, buffer, path);
 		if (path != NULL && builtin != 0)
 		{
 			id = fork();
@@ -31,7 +38,7 @@ int main(int ac, char **av, char **env)
 			{
 				/*Child Process Handling*/
 				exec_handler(path, argVec);
-				//calls execve, handles all errors
+				continue;
 			}
 			else
 			{
@@ -39,7 +46,7 @@ int main(int ac, char **av, char **env)
 				/*Parent Process Handling*/
 			}
 		}
-		free_all();
+		free_all(buffer, argVec, path);
 	}
 	return (0);
 }
@@ -65,7 +72,13 @@ void prompt()
 
 void exec_handler(char *path, char **argVec)
 {
+	int exec;
 
+	exec = execve(path, argVec, environ);
+	if (exec < 0)
+	{
+		perror("");
+	}
 }
 
 /**
@@ -81,7 +94,7 @@ void free_all(char *buffer, char **argVec, char *path)
 {
 	free (buffer);
 	free (path);
-	free_vec(argVec);
+	free_vector(argVec);
 }
 
 /**
@@ -90,8 +103,24 @@ void free_all(char *buffer, char **argVec, char *path)
  * Return 0 if neither, 1 if either! (though exit will never make it through to completion)
  */
 
-int builtin_handler(char *builtin)
+int builtin_handler(char **argVec, char *buffer, char *path)
 {
+	int builtin_num;
+
+	builtin_num = 0;
 	/* checks to see if buffer says exit*/
+	if (strcmp(buffer, "exit\n") == 0)
+	{
+		builtin_num = 1;
+		free_all(buffer, argVec, path);
+		exit(0);
+	}
 	/* checks to see if buffer says env*/
+	if (strcmp(buffer, "env\n") == 0)
+	{
+		builtin_num = 1;
+		print_env();
+	}
+	return (builtin_num);
+
 }
