@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 /**
  * _getenv()- gets a specific environment variable
@@ -69,6 +70,32 @@ void print_env(void)
 	{
 		printf("%s\n", environ[i]);
 		i++;
+	}
+
+}
+
+/**
+ * new_line_sanitize()- removes new line from buffer prior to tokenization
+ * @buffer: the buffer in question
+ *
+ * Return: no return
+ */
+
+void new_line_sanitize(char *buffer)
+{
+	int i;
+
+	if (strlen(buffer) > 2)
+	{
+		i = 0;
+		while (buffer[i] != '\0')
+		{
+			if (buffer[i] == '\n')
+			{
+				buffer[i] = '\0';
+			}
+			i++;
+		}
 	}
 
 }

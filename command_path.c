@@ -16,7 +16,7 @@ char *command_path(char *command)
 	char path_buffer[255];
 	char *result;
 	char **tokens;
-	int i, j;
+	int i;
 	char *_path = strdup(_getenv("PATH"));
 
 	tokens = malloc(sizeof(char) * 100);
@@ -33,13 +33,6 @@ char *command_path(char *command)
 		strcpy(path_buffer, tokens[i]);
 		strcat(path_buffer, "/");
 		strcat(path_buffer, command);
-		j = 0;
-		while (path_buffer[j] != '\0')
-		{
-			if (path_buffer[j] == '\n')
-			path_buffer[j] = '\0';
-			j++;
-		}
 		if (access(path_buffer, F_OK) == 0) 
 		{
 			/** TODO: pull out into separate func */

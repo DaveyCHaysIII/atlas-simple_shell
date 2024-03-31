@@ -37,7 +37,6 @@ int main(void)
 		input_parser(buffer, " ", argVec);
 		_path = command_path(argVec[0]);
 		builtin = builtin_handler(argVec, buffer, _path);
-		printf("argVec[0] = %s\nargVec[1] = %s\n", argVec[0], argVec[1]);
 		if (_path != NULL && builtin == 0)
 		{
 			id = fork();
@@ -121,14 +120,14 @@ int builtin_handler(char **argVec, char *buffer, char *_path)
 
 	builtin_num = 0;
 	/* checks to see if buffer says exit*/
-	if (strcmp(buffer, "exit\n") == 0)
+	if (strcmp(buffer, "exit") == 0)
 	{
 		builtin_num = 1;
 		free_all(buffer, argVec, _path);
 		exit(0);
 	}
 	/* checks to see if buffer says env*/
-	if (strcmp(buffer, "env\n") == 0)
+	if (strcmp(buffer, "env") == 0)
 	{
 		builtin_num = 1;
 		print_env();

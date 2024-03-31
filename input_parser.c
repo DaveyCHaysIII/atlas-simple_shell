@@ -16,6 +16,7 @@ void input_parser(char *buffer, char *delim, char **argVec)
 	int i;
 	char *token;
 
+	new_line_sanitize(buffer);
 	i = 0;
 	token = strtok(buffer, delim);
 	while (token != NULL)
