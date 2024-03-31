@@ -40,8 +40,9 @@ char *command_path(char *command)
 			path_buffer[j] = '\0';
 			j++;
 		}
-		if (access(path_buffer, F_OK) == 0)
+		if (access(path_buffer, F_OK) == 0) 
 		{
+			/** TODO: pull out into separate func */
 			result = strdup(path_buffer);
 			free_vector(tokens);
 			return (result);
@@ -51,6 +52,7 @@ char *command_path(char *command)
 	command[strlen(command)-1] = '\0';
 	if (access(command, F_OK) == 0)
 	{
+		/** TODO: pull out into separate func */
 		result = strdup(command);
 		free_vector(tokens);
 		return (result);

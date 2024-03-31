@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "/home/davey/Desktop/showcase/atlas-simple_shell/shell.h"
+#include "../shell.h"
 
 int main()
 {
