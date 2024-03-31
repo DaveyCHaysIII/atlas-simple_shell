@@ -16,9 +16,8 @@ char *command_path(char *command)
 	char path_buffer[255];
 	char *result;
 	char **tokens;
-	int i, j, k;
-
-	char *path = _getenv("PATH");
+	int i, j;
+	char *_path = strdup(_getenv("PATH"));
 
 	tokens = malloc(sizeof(char) * 100);
 	if (tokens == NULL)
@@ -26,14 +25,7 @@ char *command_path(char *command)
 		perror("ss: command_memerr ");
 		return (NULL);
 	}
-	input_parser(path, ":", tokens);
-
-	k = 0;
-	while (tokens[k] != NULL)
-	{
-		printf("tokens[%d] = %s\n", k, tokens[k]);
-		k++;
-	}
+	input_parser(_path, ":", tokens);
 
 	i = 0;
 	while (tokens[i] != NULL)
@@ -48,6 +40,7 @@ char *command_path(char *command)
 			path_buffer[j] = '\0';
 			j++;
 		}
+		printf("path_buffer: %s, length, %ld\n", path_buffer, strlen(path_buffer));
 		if (access(path_buffer, F_OK) == 0)
 		{
 			result = strdup(path_buffer);
@@ -55,6 +48,13 @@ char *command_path(char *command)
 			return (result);
 		}
 		i++;
+	}
+	command[strlen(command)-1] = '\0';
+	if (access(command, F_OK) == 0)
+	{
+		result = strdup(command);
+		free_vector(tokens);
+		return (result);
 	}
 	free_vector(tokens);
 	perror("ss: patherr ");

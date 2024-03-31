@@ -17,14 +17,17 @@ int main(void)
 	int command;
 	size_t n;
 	char **argVec;
-	char *path;
-	int id, i;
+	char *_path;
+	int id;
 	int builtin;
 
-	n = 0;
-	argVec = malloc(sizeof(char) * 10);
 	while (1)
 	{
+		n = 0;
+		command = 0;
+		buffer = NULL;
+		_path = NULL;
+		argVec = malloc(sizeof(char *) * 10);
 		prompt();
 		command = getline(&buffer, &n, stdin);
 		if (command < 0)
@@ -32,29 +35,27 @@ int main(void)
 			perror("ss: commanderr ");
 		}
 		input_parser(buffer, " ", argVec);
-		path = command_path(argVec[0]);
-		builtin = builtin_handler(argVec, buffer, path);
-		if (path != NULL && builtin != 0)
+		_path = command_path(argVec[0]);
+		builtin = builtin_handler(argVec, buffer, _path);
+		if (_path != NULL && builtin == 0)
 		{
 			id = fork();
 			if (id == 0)
 			{
-				exec_handler(path, argVec);
+				exec_handler(_path, argVec);
+				free_all(buffer, argVec, _path);
 				continue;
 			}
 			else
 			{
 				wait(NULL);
-				buffer = NULL;
-				i = 0;
-				while (argVec[i] != NULL)
-				{
-					argVec[i] = NULL;
-					i++;
-				}
+				free_all(buffer, argVec, _path);
+				continue;
 			}
 		}
+		free_all(buffer, argVec, _path);
 	}
+	printf("something went horribly wrong");
 	return (0);
 }
 
@@ -77,11 +78,11 @@ void prompt(void)
  * Return: no return
  */
 
-void exec_handler(char *path, char **argVec)
+void exec_handler(char *_path, char **argVec)
 {
 	int exec;
 
-	exec = execve(path, argVec, environ);
+	exec = execve(_path, argVec, environ);
 	if (exec < 0)
 	{
 		perror("ss: execerr ");
@@ -97,10 +98,10 @@ void exec_handler(char *path, char **argVec)
  * Return: no return
  */
 
-void free_all(char *buffer, char **argVec, char *path)
+void free_all(char *buffer, char **argVec, char *_path)
 {
 	free(buffer);
-	free(path);
+	free(_path);
 	free_vector(argVec);
 }
 
@@ -113,7 +114,7 @@ void free_all(char *buffer, char **argVec, char *path)
  * Return: 0 if neither, 1 if either!
  */
 
-int builtin_handler(char **argVec, char *buffer, char *path)
+int builtin_handler(char **argVec, char *buffer, char *_path)
 {
 	int builtin_num;
 
@@ -122,7 +123,7 @@ int builtin_handler(char **argVec, char *buffer, char *path)
 	if (strcmp(buffer, "exit\n") == 0)
 	{
 		builtin_num = 1;
-		free_all(buffer, argVec, path);
+		free_all(buffer, argVec, _path);
 		exit(0);
 	}
 	/* checks to see if buffer says env*/

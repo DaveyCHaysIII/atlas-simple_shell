@@ -1,6 +1,7 @@
 #include "shell.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * input_parser()- parses the input
@@ -24,4 +25,5 @@ void input_parser(char *buffer, char *delim, char **argVec)
 		i++;
 	}
 	argVec[i] = NULL;
+	token = NULL;
 }

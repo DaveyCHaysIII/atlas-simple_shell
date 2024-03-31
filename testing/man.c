@@ -4,7 +4,7 @@
 
 int main()
 {
-	char *path = "/usr/bin/ls";
+	char *path = "/bin/ls";
 	int a = access(path, F_OK);
 
 	if (a == 0)
