@@ -40,7 +40,6 @@ char *command_path(char *command)
 			path_buffer[j] = '\0';
 			j++;
 		}
-		printf("path_buffer: %s, length, %ld\n", path_buffer, strlen(path_buffer));
 		if (access(path_buffer, F_OK) == 0)
 		{
 			result = strdup(path_buffer);

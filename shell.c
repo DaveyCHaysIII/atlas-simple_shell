@@ -37,13 +37,13 @@ int main(void)
 		input_parser(buffer, " ", argVec);
 		_path = command_path(argVec[0]);
 		builtin = builtin_handler(argVec, buffer, _path);
+		printf("argVec[0] = %s\nargVec[1] = %s\n", argVec[0], argVec[1]);
 		if (_path != NULL && builtin == 0)
 		{
 			id = fork();
 			if (id == 0)
 			{
-				exec_handler(_path, argVec);
-				free_all(buffer, argVec, _path);
+				exec_handler(_path, argVec, buffer);
 				continue;
 			}
 			else
@@ -78,7 +78,7 @@ void prompt(void)
  * Return: no return
  */
 
-void exec_handler(char *_path, char **argVec)
+void exec_handler(char *_path, char **argVec, char *buffer)
 {
 	int exec;
 
@@ -87,6 +87,7 @@ void exec_handler(char *_path, char **argVec)
 	{
 		perror("ss: execerr ");
 	}
+	free_all(buffer, argVec, _path);
 }
 
 /**
