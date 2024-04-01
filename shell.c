@@ -11,7 +11,7 @@
  * Return: 0
  */
 
-int main()
+int main(void)
 {
 	char *buffer;
 	int command;
