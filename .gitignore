@@ -1,5 +1,5 @@
 1
-*.out
+a.out
 *.core
 .vscode
 
