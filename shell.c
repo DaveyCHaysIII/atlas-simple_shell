@@ -11,7 +11,7 @@
  * Return: 0
  */
 
-int main(void)
+int main()
 {
 	char *buffer;
 	int command;
@@ -21,6 +21,7 @@ int main(void)
 	int id;
 	int builtin;
 
+
 	while (1)
 	{
 		n = 0;
@@ -28,15 +29,24 @@ int main(void)
 		buffer = NULL;
 		_path = NULL;
 		argVec = malloc(sizeof(char *) * 10);
-		prompt();
+		
+		if (isatty(STDIN_FILENO))
+		{
+			prompt();
+		}
 		command = getline(&buffer, &n, stdin);
 		if (command < 0)
 		{
 			perror("ss: commanderr ");
 		}
+		if (strcmp(buffer, "\n") == 0)
+		{
+			free_all(buffer, argVec, _path);
+			continue;
+		}
 		input_parser(buffer, " ", argVec);
-		_path = command_path(argVec[0]);
 		builtin = builtin_handler(argVec, buffer, _path);
+		_path = command_path(argVec[0]);
 		if (_path != NULL && builtin == 0)
 		{
 			id = fork();
@@ -100,8 +110,14 @@ void exec_handler(char *_path, char **argVec, char *buffer)
 
 void free_all(char *buffer, char **argVec, char *_path)
 {
-	free(buffer);
-	free(_path);
+	if (buffer != NULL)
+	{
+		free(buffer);
+	}
+	if (_path != NULL)
+	{
+		free(_path);
+	}
 	free_vector(argVec);
 }
 

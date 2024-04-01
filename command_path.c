@@ -35,22 +35,22 @@ char *command_path(char *command)
 		strcat(path_buffer, command);
 		if (access(path_buffer, F_OK) == 0) 
 		{
-			/** TODO: pull out into separate func */
 			result = strdup(path_buffer);
 			free_vector(tokens);
+			free(_path);
 			return (result);
 		}
 		i++;
 	}
-	command[strlen(command)-1] = '\0';
 	if (access(command, F_OK) == 0)
 	{
-		/** TODO: pull out into separate func */
 		result = strdup(command);
 		free_vector(tokens);
+		free(_path);
 		return (result);
 	}
 	free_vector(tokens);
+	free(_path);
 	perror("ss: patherr ");
 	return (NULL);
 }
