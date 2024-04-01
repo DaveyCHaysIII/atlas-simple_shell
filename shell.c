@@ -39,6 +39,7 @@ int main()
 		command = getline(&buffer, &n, stdin);
 		if (command < 0)
 		{
+			perror("EOF");
 			free_all(buffer, argVec, _path);
 			exit(EXIT_SUCCESS);
 		}
