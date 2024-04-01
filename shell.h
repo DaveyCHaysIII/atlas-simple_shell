@@ -4,6 +4,7 @@
 void prompt(void);
 void input_parser(char *buffer, char *delim, char **argVec);
 void new_line_sanitize(char *buffer);
+void whitespace_handler(char *buffer);
 void free_vector(char **vector);
 void exec_handler(char *path, char **argVec, char *buffer);
 void free_all(char *buffer, char **argVec, char *path);

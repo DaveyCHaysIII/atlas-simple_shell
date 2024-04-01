@@ -28,6 +28,8 @@ int main()
 		command = 0;
 		buffer = NULL;
 		_path = NULL;
+		id = 0;
+		builtin = 0;
 		argVec = malloc(sizeof(char *) * 10);
 		
 		if (isatty(STDIN_FILENO))
@@ -38,7 +40,7 @@ int main()
 		if (command < 0)
 		{
 			free_all(buffer, argVec, _path);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		if (strcmp(buffer, "\n") == 0)
 		{
@@ -119,7 +121,10 @@ void free_all(char *buffer, char **argVec, char *_path)
 	{
 		free(_path);
 	}
-	free_vector(argVec);
+	if (argVec != NULL)
+	{
+		free_vector(argVec);
+	}
 }
 
 /**
