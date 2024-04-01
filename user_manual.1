@@ -5,9 +5,14 @@ Simple Shell \- command interpreter
 .B shell
 .RI [ command_string ]
 .SH DESCRIPTION
-The shell is a command language interpreter. This is the basic operation of a Unix-style operating system.
+The shell is a command language interpreter that executes commands read from the standard input or from a file.
+ This is the basic operation of a Unix-style operating system.
 .SH OPTIONS
-.IP "not yet listed"
+.IP we have no single character shell options as of this publication. 
+Subject to change without notice.
+Does interpret a number of multi-character options.  
+These options must appear on the command line before the single-
+character(if available) options to be recognized.
 Execute the command_string.
 .SH EXAMPLES
 .IP "shell \"echo Hello, World!\""
@@ -15,6 +20,19 @@ This will print 'Hello, World!' to the console.
 .SH SEE ALSO
 .BR bash (1),
 .BR sh (1)
+.SH Simple Commands
+A simple command consists of optional variable assignments followed by blank-separated words and redirections. It is terminated by a control operator. The first word specifies the command to be executed (passed as argument zero), and the remaining words are passed as arguments to the invoked command.
+.PP
+The return value of a simple command is its exit status, or 128+n if the command is terminated by signal n.
+.PP
+.SH Pipelines
+A pipeline is a sequence of one or more commands separated by the control operators | or |&. The format for a pipeline is:
+.PP
+.B [time [-p]] [ ! ] command1 [ [|⎪|&] command2 ... ]
+.PP
+The standard output of command1 is connected via a pipe to the standard input of command2. This connection occurs before any redirections specified by command1 (see REDIRECTION below). If |& is used, command1's standard error, in addition to its standard output, is connected to command2's standard input through the pipe (shorthand for 2>&1 |). This implicit redirection of standard error to standard output is performed after any redirections specified by command1.
+.PP
+The return status of a pipeline is the exit status of the last command, unless the pipefail option is enabled. If pipefail is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. If the reserved word ! precedes a pipeline, the exit status of that pipeline is the logical negation of the exit status as described above. The shell waits for all commands in the pipeline to terminate before returning a value. 
 .SH HISTORY
     2024 - Originally written by Atlas School students
     Davey Hays <david.c.hays.iii@gmail.com> and Chase Sparks <charles.sparks@atlasschool.com>
