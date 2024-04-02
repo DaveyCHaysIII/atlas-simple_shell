@@ -30,7 +30,7 @@ void input_parser(char *buffer, char *delim, char **argVec)
 		argVec[i] = strdup(token);
         if (argVec[i] == NULL)
         {
-            perror("Failed to duplicate token");
+            /**perror("Failed to duplicate token");*/
             break;
         }
 		token = strtok(NULL, delim);
