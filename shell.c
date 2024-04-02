@@ -30,7 +30,7 @@ int main()
 		_path = NULL;
 		id = 0;
 		builtin = 0;
-		argVec = malloc(sizeof(char *) * 10);
+		argVec = calloc(10, sizeof(char *));
 
 		if (isatty(STDIN_FILENO))
 		{
@@ -115,10 +115,7 @@ void free_all(char *buffer, char **argVec, char *_path)
 	{
 		free(_path);
 	}
-	if (argVec != NULL)
-	{
 		free_vector(argVec);
-	}
 }
 
 /**

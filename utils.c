@@ -47,12 +47,18 @@ void free_vector(char **vector)
 	int i;
 
 	i = 0;
-	while (vector[i] != NULL)
+	if (vector != NULL)
 	{
-		free(vector[i]);
-		i++;
+		while (i < 10)
+		{
+			if (vector[i] != NULL)
+			{
+				free(vector[i]);
+			}
+			i++;
+		}
+		free(vector);
 	}
-	free(vector);
 }
 
 /**
