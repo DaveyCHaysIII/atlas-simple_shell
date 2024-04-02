@@ -40,20 +40,20 @@ void input_parser(char *buffer, char *delim, char **argVec)
 
 void new_line_sanitize(char *buffer)
 {
-        int i;
+	int i;
 
-        if (strlen(buffer) > 2)
-        {
-                i = 0;
-                while (buffer[i] != '\0')
-                {
-                        if (buffer[i] == '\n')
-                        {
-                                buffer[i] = '\0';
-                        }
-                        i++;
-                }
-        }
+	if (strlen(buffer) > 2)
+	{
+		i = 0;
+		while (buffer[i] != '\0')
+		{
+			if (buffer[i] == '\n')
+			{
+				buffer[i] = '\0';
+			}
+			i++;
+		}
+	}
 }
 
 /**
@@ -66,7 +66,7 @@ void new_line_sanitize(char *buffer)
 void whitespace_handler(char *buffer)
 {
 	int i, whitespace_count;
-	
+
 	i = 0;
 	whitespace_count = 0;
 	while (buffer[i] != '\0')
@@ -78,5 +78,5 @@ void whitespace_handler(char *buffer)
 		i++;
 	}
 	if (i == whitespace_count)
-	buffer[0] = '\0';
+		buffer[0] = '\0';
 }
