@@ -23,7 +23,6 @@ char *command_path(char *command)
 	tokens = malloc(sizeof(char) * 100);
 	if (tokens == NULL)
 	{
-		perror("ss: command_memerr ");
 		return (NULL);
 	}
 	input_parser(_path, ":", tokens);
@@ -52,6 +51,5 @@ char *command_path(char *command)
 	}
 	free_vector(tokens);
 	free(_path);
-	perror("ss: patherr ");
 	return (NULL);
 }

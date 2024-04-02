@@ -39,7 +39,6 @@ int main()
 		command = getline(&buffer, &n, stdin);
 		if (command < 0)
 		{
-			perror("EOF");
 			free_all(buffer, argVec, _path);
 			exit(EXIT_SUCCESS);
 		}
@@ -93,13 +92,7 @@ void prompt(void)
 
 void exec_handler(char *_path, char **argVec, char *buffer)
 {
-	int exec;
-
-	exec = execve(_path, argVec, environ);
-	if (exec < 0)
-	{
-		perror("ss: execerr ");
-	}
+	execve(_path, argVec, environ);
 	free_all(buffer, argVec, _path);
 }
 

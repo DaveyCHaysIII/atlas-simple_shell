@@ -15,7 +15,7 @@ void input_parser(char *buffer, char *delim, char **argVec)
 {
 	int i;
 	char *token;
-
+	
 	new_line_sanitize(buffer);
 	whitespace_handler(buffer);
 	i = 0;
