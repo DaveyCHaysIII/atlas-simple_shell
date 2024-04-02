@@ -48,12 +48,16 @@ int main()
 		if (command < 0)
 		{
 			perror("EOF");
+            /**printf("Test line 51");
 			free_all(buffer, argVec, _path);
+            printf("Test line 53");*/
 			exit(EXIT_SUCCESS);
 		}
 		if (strcmp(buffer, "\n") == 0)
 		{
+            /**printf("Test line 58");
 			free_all(buffer, argVec, _path);
+            printf("Test line 60");*/
 			continue;
 		}
 		input_parser(buffer, " ", argVec);
@@ -64,17 +68,21 @@ int main()
 			id = fork();
 			if (id == 0)
 			{
-				exec_handler(_path, argVec, buffer);
+				exec_handler(_path, argVec);
 				continue;
 			}
 			else
 			{
 				wait(NULL);
+                /**printf("Test line 77");
 				free_all(buffer, argVec, _path);
+                printf("Test line 79");*/
 				continue;
 			}
 		}
+        /**printf("Test line 83");
 		free_all(buffer, argVec, _path);
+        printf("Test line 85");*/
 	}
 	printf("something went horribly wrong");
 	return (0);
@@ -99,7 +107,7 @@ void prompt(void)
  * Return: no return
  */
 
-void exec_handler(char *_path, char **argVec, char *buffer)
+void exec_handler(char *_path, char **argVec)
 {
 	int exec;
 
@@ -107,8 +115,9 @@ void exec_handler(char *_path, char **argVec, char *buffer)
 	if (exec < 0)
 	{
 		perror("ss: execerr ");
+        exit(0);
 	}
-	free_all(buffer, argVec, _path);
+
 }
 
 /**
