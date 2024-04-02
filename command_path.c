@@ -33,7 +33,7 @@ char *command_path(char *command)
 		strcpy(path_buffer, tokens[i]);
 		strcat(path_buffer, "/");
 		strcat(path_buffer, command);
-		if (access(path_buffer, F_OK) == 0) 
+		if (access(path_buffer, F_OK) == 0)
 		{
 			result = strdup(path_buffer);
 			free_vector(tokens);

@@ -31,12 +31,20 @@ int main()
 		id = 0;
 		builtin = 0;
 		argVec = malloc(sizeof(char *) * 10);
-		
+
 		if (isatty(STDIN_FILENO))
 		{
 			prompt();
+			command = getline(&buffer, &n, stdin);
 		}
-		command = getline(&buffer, &n, stdin);
+        else
+        {
+            char temp[256]; /**or other appropriate size*/
+            if (fgets(temp, sizeof(temp), stdin) == NULL)
+                break; /**exit loop on EOF or error*/
+            buffer = strdup(temp);
+            command = strlen(buffer);
+		}
 		if (command < 0)
 		{
 			perror("EOF");

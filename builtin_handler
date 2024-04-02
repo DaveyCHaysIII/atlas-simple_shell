@@ -1,0 +1,21 @@
+int builtin_handler(char **argVec, char *buffer, char *_path)
+{
+	int builtin_num;
+
+	builtin_num = 0;
+	/* checks to see if buffer says exit*/
+	if (strcmp(buffer, "exit") == 0)
+	{
+		builtin_num = 1;
+		free_all(buffer, argVec, _path);
+		exit(0);
+	}
+	/* checks to see if buffer says env*/
+	if (strcmp(buffer, "env") == 0)
+	{
+		builtin_num = 1;
+		print_env();
+	}
+	return (builtin_num);
+
+}
