@@ -14,7 +14,7 @@ Fairly straightforward, download the requisite files from Github, compile and ru
 
 ## Usage
 The shell is simplistic, with expected functionalites such as:
-- Executing programs 
+- Executing programs
 - System calls: getpid, pwd, open, opendir, kill, close, closedir, chdir, exit.
 
 ## Contributions
